@@ -1,0 +1,44 @@
+.hero-section {
+  background: linear-gradient(120deg, #1a365d 0%, #234d7a 55%, #3182ce 100%);
+  color: #ffffff;
+  padding: 4rem 1.25rem 3rem;
+}
+
+.hero-content {
+  max-width: 980px;
+  margin: 0 auto;
+  display: grid;
+  gap: 1rem;
+}
+
+.hero-badge {
+  display: inline-block;
+  width: fit-content;
+  padding: 0.45rem 0.8rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.15);
+  color: #e6f2ff;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero-section h1 {
+  margin: 0;
+  font-size: clamp(1.8rem, 3.2vw, 2.8rem);
+  line-height: 1.15;
+}
+
+.hero-section p {
+  margin: 0;
+  max-width: 720px;
+  font-size: 1.02rem;
+  color: #e8f3ff;
+}
+
+@media (min-width: 768px) {
+  .hero-section {
+    padding: 5rem 2rem 3.5rem;
+  }
+}

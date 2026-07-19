@@ -1,0 +1,17 @@
+.footer {
+  margin-top: auto;
+  padding: 1.25rem 1rem 1.5rem;
+  text-align: center;
+  background: #1a365d;
+  color: #e8f3ff;
+}
+
+.footer p {
+  margin: 0.25rem 0;
+}
+
+@media (min-width: 768px) {
+  .footer {
+    padding: 1.5rem 2rem 1.8rem;
+  }
+}

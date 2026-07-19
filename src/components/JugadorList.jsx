@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import JugadorCard from "./JugadorCard"; // IMPORTANTE: Cambia el import
+import './JugadorList.css';
+import JugadorCard from "./JugadorCard";
 
-function JugadorList({ onCargados }) { // Recibimos la función para el contador
+function JugadorList({ onCargados }) {
     const [jugadores, setJugadores] = useState([]);
     const [cargando, setCargando] = useState(true);
     const [error, setError] = useState(null);
@@ -9,20 +10,15 @@ function JugadorList({ onCargados }) { // Recibimos la función para el contador
     useEffect(() => {
         setCargando(true);
 
-        // USAMOS LA URL OFICIAL
         fetch('https://jugadores.up.railway.app/players')
             .then((response) => {
                 if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
                 return response.json();
             })
             .then((respuesta) => {
-                // La guía dice que los datos están en 'respuesta.data'
                 const lista = respuesta.data;
                 setJugadores(lista);
-                
-                // Actualizamos el contador en App.jsx
-                onCargados(lista.length); 
-                
+                onCargados(lista.length);
                 setCargando(false);
             })
             .catch((errorPeticion) => {
@@ -31,23 +27,58 @@ function JugadorList({ onCargados }) { // Recibimos la función para el contador
             });
     }, [onCargados]);
 
-    if (cargando) return <div><h1>Cargando jugadores...</h1></div>;
-    
-    if (error) return <div><h1>Error al conectar: {error}</h1></div>;
+    if (cargando) return (
+        <section className="catalog-section">
+            <div className="section-heading">
+                <h2>Jugadores destacados</h2>
+                <p>Estamos preparando el catálogo más reciente para ti.</p>
+            </div>
+            <div className="state-card loading-state" role="status" aria-live="polite">
+                <div className="skeleton skeleton-image"></div>
+                <div className="skeleton skeleton-line"></div>
+                <div className="skeleton skeleton-line short"></div>
+            </div>
+        </section>
+    );
 
-    // Si la lista está vacía
-    if (jugadores.length === 0) return <div><h1>No hay jugadores disponibles</h1></div>;
+    if (error) return (
+        <section className="catalog-section">
+            <div className="section-heading">
+                <h2>Jugadores destacados</h2>
+                <p>No fue posible cargar la información en este momento.</p>
+            </div>
+            <div className="state-card error-state" role="alert">
+                <h3>Oops, algo salió mal</h3>
+                <p>{error}</p>
+            </div>
+        </section>
+    );
+
+    if (jugadores.length === 0) return (
+        <section className="catalog-section">
+            <div className="section-heading">
+                <h2>Jugadores destacados</h2>
+                <p>No hay jugadores disponibles por el momento.</p>
+            </div>
+            <div className="state-card empty-state">
+                <h3>Sin resultados</h3>
+                <p>Vuelve a intentarlo más tarde.</p>
+            </div>
+        </section>
+    );
 
     return (
-        <div>
-            <h1>Sección de Jugadores</h1>
-            <div>
+        <section className="catalog-section">
+            <div className="section-heading">
+                <h2>Jugadores destacados</h2>
+                <p>Explora el perfil completo de cada futbolista y encuentra los datos más relevantes.</p>
+            </div>
+            <div className="player-grid">
                 {jugadores.map((jugador) => (
-                    // Pasamos cada jugador a la tarjeta
                     <JugadorCard key={jugador.id} jugador={jugador} />
                 ))}
             </div>
-        </div>
+        </section>
     );
 }
 

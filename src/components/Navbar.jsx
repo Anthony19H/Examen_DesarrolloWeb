@@ -1,12 +1,16 @@
+import './Navbar.css';
+
 function Navbar({ total }) {
     return (
-        <nav>
-            {/* Nombre o logotipo textual */}
-            <h1>Catálogo de Jugadores</h1>
-            
-            {/* Contador de jugadores cargados */}
-            <div>
-                <p>Total de jugadores: {total}</p>
+        <nav className="navbar">
+            <div className="navbar-brand">
+                <span className="brand-mark">⚽</span>
+                <h1>Catálogo de Jugadores</h1>
+            </div>
+
+            <div className="navbar-counter" aria-label={`Total de jugadores cargados: ${total}`}>
+                <span className="counter-label">Jugadores</span>
+                <strong>{total}</strong>
             </div>
         </nav>
     );
